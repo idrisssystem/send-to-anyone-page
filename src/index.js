@@ -771,15 +771,7 @@ document.addEventListener('DOMContentLoaded', async() => {
                 popupRevert.style.display='block';
                 popups.selected = popupRevert;
 
-                // connect wallet when needed
-                if (!provider) {
-                    await connectWallet()
-                }
-
-                const accounts = await SendToAnyoneLogic.web3.eth.getAccounts();
-                let selectedAccount = accounts[0];
-
-                popupRevert.append(new RevertPayment(SendToAnyoneLogic.idriss).html);
+                popupRevert.append(new RevertPayment().html);
                 adjustButtonActions();
             }
 
