@@ -78,6 +78,20 @@ module.exports = (env, argv) => {
         optimization: {
             //runtimeChunk: 'single',
         },
+        experiments:{topLevelAwait: true},
+        resolve: {
+         fallback: {
+           fs: false,
+           'os': false,
+           "https": require.resolve("https-browserify"),
+           'http': require.resolve('stream-http/'),
+           'assert': false,
+           'url': require.resolve('url/'),
+           'https': require.resolve('https-browserify/'),
+            "stream": require.resolve("stream-browserify"),
+           'crypto': require.resolve('crypto-browserify'),
+         },
+        }
     };
 }
 // module.exports = {
