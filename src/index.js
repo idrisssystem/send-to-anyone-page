@@ -567,7 +567,7 @@ document.addEventListener('DOMContentLoaded', async() => {
             document.querySelector('#nftSelectButton').className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             document.querySelector('#tokenSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             document.querySelector('#multiSendSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            document.querySelector('#revertSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+            document.querySelector('#flyoutMenuButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
             popups.selected.firstElementChild?.remove();
             popupToken.style.display='none';
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', async() => {
             document.querySelector('#tokenSelectButton').className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             document.querySelector('#nftSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             document.querySelector('#multiSendSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            document.querySelector('#revertSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+            document.querySelector('#flyoutMenuButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
             popups.selected.firstElementChild?.remove();
             popupNFT.style.display='none';
@@ -685,7 +685,7 @@ document.addEventListener('DOMContentLoaded', async() => {
                 document.querySelector('#multiSendSelectButton').className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
                 document.querySelector('#nftSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
                 document.querySelector('#tokenSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                document.querySelector('#revertSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                document.querySelector('#flyoutMenuButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
                 popups.selected.firstElementChild?.remove();
                 popupNFT.style.display='none';
@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', async() => {
             try {
                 adjustButtonActions();
 
-                document.querySelector('#revertSelectButton').className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                document.querySelector('#flyoutMenuButton').className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
                 document.querySelector('#nftSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
                 document.querySelector('#tokenSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
                 document.querySelector('#multiSendSelectButton').className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
@@ -934,3 +934,29 @@ document.addEventListener('DOMContentLoaded', async() => {
         console.error(e)
     }
 });
+
+// IDs
+// (new) flyoutMenuButton - the outer part of the button, gets different styling when inner element (like revert tab) clicked
+// (new) flyoutMenuSelectButton - inner part of the same button, triggers the menu
+// (new) flyoutMenuBody - body of the flyout menu
+// revertSelectButton - old button that handles selecting revert tab (now clicking the transaction reversal option)
+
+let toggleFlyoutMenu = document.getElementById('flyoutMenuSelectButton');
+let flyoutMenu = document.getElementById('flyoutMenuBody');
+let flyoutMenuElement1 = document.getElementById('revertSelectButton');
+
+    toggleFlyoutMenu.addEventListener('click', () => {
+      flyoutMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      const targetElement = event.target;
+      if (!flyoutMenu.contains(targetElement) && targetElement !== toggleFlyoutMenu) {
+        flyoutMenu.classList.add('hidden');
+      }
+    });
+
+// ToDo: when there is more elements in the flyout menu, add them here
+    flyoutMenuElement1.addEventListener('click', () => {
+      flyoutMenu.classList.add('hidden');
+    });
