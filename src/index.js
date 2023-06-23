@@ -944,7 +944,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 let toggleFlyoutMenu = document.getElementById('flyoutMenuSelectButton');
 let flyoutMenu = document.getElementById('flyoutMenuBody');
 let flyoutMenuElement1 = document.getElementById('revertSelectButton');
-
+// ToDo: add also flyoutMenuButton as the trigger below to increase the click area
     toggleFlyoutMenu.addEventListener('click', () => {
       flyoutMenu.classList.toggle('hidden');
     });
