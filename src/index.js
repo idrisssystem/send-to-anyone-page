@@ -673,7 +673,6 @@ document.addEventListener('DOMContentLoaded', async() => {
                                 nftName = (selectedNFT[0] != undefined) ? selectedNFT[0].name : "";
                                 handleRest();
                             });
-            adjustButtonActions();
         }
         async function handleMultiSendClick() {
             selectedTab = "multi";
@@ -742,15 +741,11 @@ document.addEventListener('DOMContentLoaded', async() => {
                     console.log("Got multiSendEvent: ", e)
                                     multiHandleRest(e);
                                 });
-
-                adjustButtonActions();
-
             }
 
             catch (e){
                 console.log(e)
                 // refresh screen so we are not stuck on error
-                adjustButtonActions();
                 multiSendButton.click()
             }
         }
@@ -772,28 +767,43 @@ document.addEventListener('DOMContentLoaded', async() => {
                 popups.selected = popupRevert;
 
                 popupRevert.append(new RevertPayment().html);
-                adjustButtonActions();
             }
 
             catch (e){
                 console.log("Revert error ", e)
                 // refresh screen so we are not stuck on error
-                adjustButtonActions();
                 revertButton.click()
             }
         }
 
-        function adjustButtonActions(){
-
+        function setupButtonActions(){
             nftButton.onclick= nftButton.onclick? '' : function () { handleNFTclick() };
             tokenButton.onclick= tokenButton.onclick? '' : function () { handleTokenClick() };
             multiSendButton.onclick= multiSendButton.onclick? '' : function () { handleMultiSendClick() };
             revertButton.onclick= revertButton.onclick? '' : function () { handleRevertClick() };
-
         }
 
+        function adjustButtonActions() {
+          disableButton(nftButton, handleNFTclick);
+          disableButton(tokenButton, handleTokenClick);
+          disableButton(multiSendButton, handleMultiSendClick);
+          disableButton(revertButton, handleRevertClick);
+        }
+
+        function disableButton(button, clickHandler) {
+          if (!button.disabled) {
+            button.disabled = true;
+            button.onclick = null;
+            setTimeout(function() {
+              button.disabled = false;
+              button.onclick = clickHandler;
+            }, 1000); // 1 second delay
+          }
+        }
+
+
         // initialize page
-        adjustButtonActions();
+        setupButtonActions();
         if (navSelection  == 'nft') await nftButton.click();
         else if (navSelection  == 'multi') await multiSendButton.click()
         else if (navSelection  == 'revert') await revertButton.click()
@@ -838,7 +848,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 
             popups.selected.querySelector('.amountCoin').textContent = amountNormal;
             //TODO: check price calculation + if it adds $fee properly
-            console.log(identifier, `${amountInteger}`, network, token, message,
+            console.log("In page: ", identifier, `${amountInteger}`, network, token, message,
                 assetType, assetAmount, assetAddress, assetId)
 
 
@@ -867,7 +877,6 @@ document.addEventListener('DOMContentLoaded', async() => {
                     name: 'Reverted',
                     message: 'Transaction was not successful'
                 })).html)
-                adjustButtonActions();
             }
         }
 
