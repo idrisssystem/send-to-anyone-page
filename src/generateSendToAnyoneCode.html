@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Generate sendToAnyone code - idriss.xyz</title>
-</head>
-<body>
-<h2>Generate code for sendToAnyone button</h2>
-<label>
-    <span>Name to be shown</span>
-    <input name="identifier" type="text">
-</label>
-<label>
-    <span>Wallet address</span>
-    <input name="recipient" type="text">
-</label>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Generate sendToAnyone code - idriss.xyz</title>
+    </head>
+    <body>
+        <h2>Generate code for sendToAnyone button</h2>
+        <label>
+            <span>Name to be shown</span>
+            <input name="identifier" type="text" />
+        </label>
+        <label>
+            <span>Wallet address</span>
+            <input name="recipient" type="text" />
+        </label>
 
-<div class="result link">
-    <h3>Link</h3>
-    <div>https://idirss.xyz/sendToAnyone</div>
-</div>
-<div class="result html">
-    <h3>Html</h3>
-    <div>&lt;script src="https://idriss.xyz/static/js/idrissSendToAnyoneSDK.js">&lt;/script>&lt;a href=&quot;https://idirss.xyz/sendToAnyone&quot; onclick=&quot;idrissShowSendToAnyonePopup({},event)&quot;&gt;Send me crypto&lt;/a&gt;</div>
-</div>
-<p>For more advanced users see <a href="https://github.com/idriss-crypto/send-to-anyone-core">our SDK</a></p>
+        <div class="result link">
+            <h3>Link</h3>
+            <div>https://idirss.xyz/sendToAnyone</div>
+        </div>
+        <div class="result html">
+            <h3>Html</h3>
+            <div>
+                &lt;script src="https://idriss.xyz/static/js/idrissSendToAnyoneSDK.js">&lt;/script>&lt;a href=&quot;https://idirss.xyz/sendToAnyone&quot; onclick=&quot;idrissShowSendToAnyonePopup({},event)&quot;&gt;Send me crypto&lt;/a&gt;
+            </div>
+        </div>
+        <p>For more advanced users see <a href="https://github.com/idriss-crypto/send-to-anyone-core">our SDK</a></p>
 
-<script src="../static/js/generateSendToAnyoneCode.js"></script>
-</body>
+        <script src="../static/js/generateSendToAnyoneCode.js"></script>
+    </body>
 </html>
