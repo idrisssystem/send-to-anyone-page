@@ -57,8 +57,8 @@ import {
     let revertButton = document.querySelector('#revertSelectButton');
     let flyoutMenuButton = document.querySelector('#flyoutMenuButton');
     let selectedTab = "token";
-    let dropdownMenu = document.getElementById("dropdownMenu");
-    let menuButton = document.getElementById("menuButton");
+    //let dropdownMenu = document.getElementById("dropdownMenu");
+    //let menuButton = document.getElementById("menuButton");
 
     const shouldSkipInputWidget = !!recipient && !!identifier && !!sendToAnyoneValue && !!network && !!token;
 
@@ -124,9 +124,9 @@ import {
         })).html)
     });
 
-    menuButton.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("hidden");
-    });
+   // menuButton.addEventListener("click", () => {
+   //     dropdownMenu.classList.toggle("hidden");
+   // });
 
     // IDs
     // (new) flyoutMenuButton - the outer part of the button, gets different styling when inner element (like revert tab) clicked
@@ -195,24 +195,20 @@ import {
         });
 
         document.querySelector('#dropdownTokenButton').addEventListener('click', async () => {
-            dropdownMenu.classList.toggle("hidden");
             tokenButton.click()
         });
 
         document.querySelector('#dropdownNFTButton').addEventListener('click', async () => {
-            dropdownMenu.classList.toggle("hidden");
             nftButton.click()
         });
 
         document.querySelector('#dropdownMultiButton').addEventListener('click', async () => {
-            dropdownMenu.classList.toggle("hidden");
             multiSendButton.click()
         });
 
-        document.querySelector('#dropdownRevertButton').addEventListener('click', async () => {
-            dropdownMenu.classList.toggle("hidden");
-            revertButton.click()
-        });
+      //  document.querySelector('#dropdownRevertButton').addEventListener('click', async () => {
+      //      revertButton.click()
+      //  });
 
         async function handleNFTclick() {
             selectedTab = "nft";
@@ -222,7 +218,7 @@ import {
             nftButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
             multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+            flyoutMenuButton.className = "text-base font-medium text-gray-500 hover:text-gray-900 hover:cursor-pointer"
 
             popups.selected.firstElementChild?.remove();
             popupToken.style.display='none';
