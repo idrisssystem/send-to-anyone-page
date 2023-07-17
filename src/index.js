@@ -56,6 +56,10 @@ import {
     let multiSendButton = document.querySelector('#multiSendSelectButton');
     let revertButton = document.querySelector('#revertSelectButton');
     let flyoutMenuButton = document.querySelector('#flyoutMenuButton');
+    let smallScreenNFTButton = document.querySelector('#dropdownNFTButton');
+    let smallScreenTokenButton = document.querySelector('#dropdownTokenButton');
+    let smallScreenMultiSendButton = document.querySelector('#dropdownMultiButton');
+    let smallScreenFlyoutButton = document.querySelector('#dropdownFlyoutMenuButton');
     let selectedTab = "token";
     //let dropdownMenu = document.getElementById("dropdownMenu");
     //let menuButton = document.getElementById("menuButton");
@@ -135,6 +139,7 @@ import {
     // revertSelectButton - old button that handles selecting revert tab (now clicking the transaction reversal option)
 
     let toggleFlyoutMenu = document.getElementById('flyoutMenuSelectButton');
+    let dropdownToggleFlyoutMenu = document.getElementById('dropdownFlyoutMenuSelectButton');
     let flyoutMenu = document.getElementById('flyoutMenuBody');
     let flyoutMenuElement1 = document.getElementById('revertSelectButton');
     // ToDo: add also flyoutMenuButton as the trigger below to increase the click area - done during merging L.
@@ -142,9 +147,13 @@ import {
       flyoutMenu.classList.toggle('hidden');
     });
 
+    smallScreenFlyoutButton.addEventListener('click', () => {
+      flyoutMenu.classList.toggle('hidden');
+    });
+
     document.addEventListener('click', (event) => {
       const targetElement = event.target;
-      if (!flyoutMenu.contains(targetElement) && !(targetElement === toggleFlyoutMenu || targetElement === flyoutMenuButton)) {
+      if (!flyoutMenu.contains(targetElement) && !(targetElement === toggleFlyoutMenu || targetElement === flyoutMenuButton || targetElement === dropdownToggleFlyoutMenu || targetElement === smallScreenFlyoutButton)) {
         flyoutMenu.classList.add('hidden');
       }
     });
@@ -186,6 +195,45 @@ import {
             document.querySelector('#connectedWallet').classList.add('hidden');
         }
 
+        function toggleNavButtonClasses(selection) {
+          // Reset the class names of all buttons to the default state
+          tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          smallScreenTokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          smallScreenNFTButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          smallScreenMultiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+          smallScreenFlyoutButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+
+          // Update the class names based on the clicked button
+          switch (selection) {
+            case "token":
+              tokenButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              smallScreenTokenButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              break;
+            case "nft":
+              nftButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              smallScreenNFTButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              break;
+            case "multi":
+              multiSendButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              smallScreenMultiSendButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              break;
+            case "flyoutMenuButton":
+              flyoutMenuButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              smallScreenFlyoutButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              break;
+            case "revert":
+              flyoutMenuButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              smallScreenFlyoutButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer";
+              break;
+            default:
+              break;
+          }
+
+        }
+
         document.querySelector('#connectWallet').addEventListener('click', async () => {
             await connectWallet();
         });
@@ -215,10 +263,12 @@ import {
 
             adjustButtonActions();
 
-            nftButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            flyoutMenuButton.className = "text-base font-medium text-gray-500 hover:text-gray-900 hover:cursor-pointer"
+            toggleNavButtonClasses(selectedTab)
+// can delete
+//            nftButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            flyoutMenuButton.className = "text-base font-medium text-gray-500 hover:text-gray-900 hover:cursor-pointer"
 
             popups.selected.firstElementChild?.remove();
             popupToken.style.display='none';
@@ -290,10 +340,13 @@ import {
 
             adjustButtonActions();
 
-            tokenButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-            flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+            toggleNavButtonClasses(selectedTab)
+
+// can delete
+//            tokenButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//            flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
             popups.selected.firstElementChild?.remove();
             popupNFT.style.display='none';
@@ -339,10 +392,13 @@ import {
 
                 adjustButtonActions();
 
-                multiSendButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                toggleNavButtonClasses(selectedTab)
+
+// can delete
+//                multiSendButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                flyoutMenuButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
                 popups.selected.firstElementChild?.remove();
                 popupNFT.style.display='none';
@@ -412,10 +468,13 @@ import {
             try {
                 adjustButtonActions();
 
-                flyoutMenuButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
-                multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                toggleNavButtonClasses(selectedTab)
+
+// can delete
+//                flyoutMenuButton.className = "text-center bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                nftButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                tokenButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+//                multiSendButton.className = "self-center text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
 
                 popups.selected.firstElementChild?.remove();
                 popupNFT.style.display='none';
