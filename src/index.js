@@ -32,6 +32,7 @@ import {
         if (network==="BSC" && token==="BNB") return "native"
         if (network==="zkSync" && token==="ETH") return "native"
         if (network==="linea" && token==="ETH") return "native"
+        if (network==="linea_testnet" && token==="ETH") return "native"
         if (network==="optimism" && token==="ETH") return "native"
         if (network==="base" && token==="ETH") return "native"
         if (network==="mantle" && token==="MNT") return "native"
@@ -582,6 +583,8 @@ import {
                     explorerLink = 'https://explorer.zksync.io/tx/' + txnHash
                 else if (network == 'linea')
                     explorerLink = 'https://explorer.linea.build/tx/' + txnHash
+                else if (network == 'linea_testnet')
+                    explorerLink = 'https://explorer.goerli.linea.build/tx/' + txnHash
                 else if (network == 'optimism')
                     explorerLink = 'https://optimistic.etherscan.io/tx/' + txnHash
                 else if (network == 'mantle')
@@ -648,6 +651,8 @@ import {
                     explorerLink = 'https://explorer.zksync.io/tx/' + txnHash
                 else if (network == 'linea')
                     explorerLink = 'https://explorer.linea.build/tx/' + txnHash
+                else if (network == 'linea_testnet')
+                    explorerLink = 'https://explorer.goerli.linea.build/tx/' + txnHash
                 else if (network == 'optimism')
                     explorerLink = 'https://optimistic.etherscan.io/tx/' + txnHash
                 else if (network == 'mantle')

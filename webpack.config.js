@@ -3,6 +3,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const setup = (mode) => {
     if (mode === 'production') {
@@ -49,17 +50,6 @@ module.exports = (env, argv) => {
             publicPath: "auto",
             filename: "[name].js",
         },
-        resolve: {
-            fallback: {
-              stream: require.resolve("stream-browserify"),
-              crypto: require.resolve("crypto-browserify"),
-              assert: require.resolve("assert/"),
-              http: require.resolve("stream-http"),
-              https: require.resolve("https-browserify"),
-              url: require.resolve("url/"),
-              os: require.resolve("os-browserify/browser"),
-            },
-        },
         plugins: [
             new CopyPlugin({
                 patterns: [
@@ -72,7 +62,8 @@ module.exports = (env, argv) => {
               template: "./src/send-to-anyone.html",
             }),
             //new BundleAnalyzerPlugin()
-            new webpack.DefinePlugin(setup(argv.mode))
+            new webpack.DefinePlugin(setup(argv.mode)),
+            new NodePolyfillPlugin()
         ],
         module: {
             rules: [
